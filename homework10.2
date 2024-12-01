@@ -1,0 +1,49 @@
+using System;
+using System.Text;
+
+class Program
+{
+    static void Main()
+    {
+        StringBuilder report = new StringBuilder();
+
+        Console.WriteLine("Введіть заголовок звіту:");
+        string reportTitle = Console.ReadLine();
+
+        report.AppendLine(reportTitle);
+
+        Console.WriteLine("Введіть дату у форматі (yyyy-MM-dd):");
+        string userDate = Console.ReadLine();
+
+        DateTime date;
+        if (DateTime.TryParse(userDate, out date))
+        {
+            report.AppendLine("Дата: " + date.ToString("yyyy-MM-dd"));
+        }
+        else
+        {
+            Console.WriteLine("Невірний формат дати. Використовуємо поточну дату.");
+            report.AppendLine("Дата: " + DateTime.Now.ToString("yyyy-MM-dd"));
+        }
+
+        StringBuilder eventsList = new StringBuilder();
+
+        Console.WriteLine("Введіть події (для завершення введіть 'exit'):");
+
+        while (true)
+        {
+            string userInput = Console.ReadLine();
+
+            if (userInput.ToLower() == "exit")
+                break;
+
+            eventsList.AppendLine(userInput);
+        }
+
+        report.AppendLine("\nСписок подій:");
+        report.AppendLine(eventsList.ToString());
+
+        Console.WriteLine("\nГотовий звіт:");
+        Console.WriteLine(report.ToString());
+    }
+}
